@@ -1,0 +1,256 @@
+﻿<Page
+    x:Class="Wp_World.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Wp_World"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    
+    <Grid x:Name="MainGrid" 
+          Background="{StaticResource MainColor2}"
+          ManipulationStarted="MainGrid_ManipulationStarted"
+          ManipulationDelta="MainGrid_ManipulationDelta">
+        
+        <VisualStateManager.VisualStateGroups >
+            <VisualStateGroup x:Name="MainVisualStateGroup">
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainSplitView.DisplayMode" Value="CompactOverlay"/>
+                        <Setter Target="MainSplitView.IsPaneOpen" Value="False"/>
+                        <Setter Target="ArticlesListView.Width" Value="300"/>
+                        <Setter Target="MainSplitView.OpenPaneLength" Value="260"/>
+                        <Setter Target="ArticleContent.Width" Value="300"/>
+                        <!--<Setter Target= "ArticleContent.(RelativePanel.AlignRightWithPanel)" Value="False"/>
+                        <Setter Target= "ArticleContent.(RelativePanel.)" Value="True"/>-->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="MediumState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="350"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainSplitView.DisplayMode" Value="CompactOverlay"/>
+                        <Setter Target="MainSplitView.IsPaneOpen" Value="False"/>
+                        <Setter Target="ArticlesListView.Width" Value="300"/>
+                        <Setter Target="ArticleContent.Visibility" Value="Visible"/>
+                        <Setter Target="MainSplitView.OpenPaneLength" Value="260"/>
+                        <Setter Target= "ArticleContent.(RelativePanel.AlignRightWithPanel)" Value="True"/>
+                        <Setter Target="ArticleContent.(RelativePanel.RightOf)" Value="ArticlesListView"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MainSplitView.DisplayMode" Value="CompactInline"/>
+                        <Setter Target="MainSplitView.IsPaneOpen" Value="True"/>
+                        <Setter Target="ArticlesListView.Width" Value="300"/>
+                        <Setter Target="MainSplitView.OpenPaneLength" Value="260"/>
+                        <Setter Target="ArticleContent.Visibility" Value="Visible"/>
+                        <Setter Target= "ArticleContent.(RelativePanel.AlignRightWithPanel)" Value="True"/>
+                        <Setter Target="ArticleContent.(RelativePanel.RightOf)" Value="ArticlesListView"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        <SplitView x:Name="MainSplitView" 
+                DisplayMode="CompactInline"
+                IsPaneOpen="True"  
+                CompactPaneLength="50">
+            <SplitView.Pane>
+                <StackPanel Orientation="Vertical" 
+                            Background="{StaticResource WpWorldTheme}"
+                           Width="260">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource HamburgerMenuButton}"
+                                Height="50"
+                                Width="50"
+                                Margin="0,0,0,0"
+                                x:Name="HamburgerButton"
+                                Content="&#xE700;" 
+                                Click="HamburgerButton_Click"/>
+                        <Image 
+                                Source="Assets/wpWorld.png" 
+                                VerticalAlignment="Center" Opacity="1" />
+                    </StackPanel>
+                    
+                    <Line Style="{StaticResource LineStyle}"/>
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource HamburgerMenuButton}"
+                                Height="50"
+                                Width="50"
+                                Margin="5,0,0,0"
+                                x:Name="SearchButton"
+                                Content="&#xE094;" />
+                        <TextBox  Width="160"
+                                  VerticalAlignment="Center"/>
+                    </StackPanel>
+                            
+                    <Line Style="{StaticResource LineStyle}"/>
+
+                    <Button Style="{StaticResource HamburgerMenuButton}"
+                            x:Name="HomeButton" Click="HomeButton_Click_1">
+                        <StackPanel  Style="{StaticResource HamburgerButtonContentStackPanelStyle}">
+                            <TextBlock Style="{StaticResource HamburgerMenuIcon}" 
+                                   Text="&#xE10F;"/>
+                            <TextBlock
+                                   Style="{StaticResource HamburgerMenuTextBlock}" 
+                                   Text="Główna"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <Button Style="{StaticResource HamburgerMenuButton}">
+                        <StackPanel  Style="{StaticResource HamburgerButtonContentStackPanelStyle}">
+                            <TextBlock Style="{StaticResource HamburgerMenuIcon}" 
+                                   Text="&#xE148;"/>
+                            <TextBlock
+                                   Style="{StaticResource HamburgerMenuTextBlock}" 
+                                   Text="Kategorie"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource HamburgerMenuButton}"
+                            x:Name="GradeButton">
+                        <StackPanel  Style="{StaticResource HamburgerButtonContentStackPanelStyle}">
+                            <TextBlock Style="{StaticResource HamburgerMenuIcon}" 
+                                   Text="&#xE1CE;"/>
+                            <TextBlock
+                                   Style="{StaticResource HamburgerMenuTextBlock}" 
+                                   Text="Oceń"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource HamburgerMenuButton}"
+                            x:Name="ContactButton">
+                        <StackPanel  Style="{StaticResource HamburgerButtonContentStackPanelStyle}">
+                            <TextBlock Style="{StaticResource HamburgerMenuIcon}" 
+                                   Text="&#xE122;"/>
+                            <TextBlock
+                                   Style="{StaticResource HamburgerMenuTextBlock}" 
+                                   Text="Kontakt"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource HamburgerMenuButton}"
+                            x:Name="AboutButton">
+                        <StackPanel  Style="{StaticResource HamburgerButtonContentStackPanelStyle}">
+                            <TextBlock Style="{StaticResource HamburgerMenuIcon}" 
+                                   Text="&#xE77F;"/>
+                            <TextBlock
+                                   Style="{StaticResource HamburgerMenuTextBlock}" 
+                                   Text="O aplikacji"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource HamburgerMenuButton}"
+                            x:Name="FacebookButton">
+                        <StackPanel  Style="{StaticResource HamburgerButtonContentStackPanelStyle}">
+                            <TextBlock Style="{StaticResource HamburgerMenuIcon}" 
+                                   Text="&#xE19F;"/>
+                            <TextBlock
+                                   Style="{StaticResource HamburgerMenuTextBlock}" 
+                                   Text="Facebook"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid>
+                    <RelativePanel x:Name="MainRelativePanel" Margin="0,6,0,6">
+                        <ListView x:Name="ArticlesListView" 
+                              Visibility="Visible" 
+                              Margin="7,-3,0,-3"
+                              >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0,5,13,5"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="1" BorderBrush="Black" >
+                                    <StackPanel x:Name="ArticlesListViewStackPanel"
+                                                    Orientation="Vertical"
+                                                    Background="{StaticResource WpWorldTheme}" 
+                                                    ManipulationMode="TranslateX,TranslateInertia,System"
+                                                    Tapped="StackPanel_Tapped" 
+                                                    ManipulationStarted="ArticlesListViewStackPanel_ManipulationStarted"
+                                                    ManipulationDelta="ArticlesListViewStackPanel_ManipulationDelta">
+                                        <Grid Height="150"
+                                              VerticalAlignment="Top">
+                                            <Image Source="{Binding image}" 
+                                                       Height="150"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                       Stretch="UniformToFill"/>
+                                        </Grid>
+                                        <TextBlock
+                                                       TextWrapping="Wrap" 
+                                                       Text="{Binding title}"
+                                                       FontSize="18" 
+                                                       Margin="5,3,5,2"
+                                                       VerticalAlignment="Top"
+                                                       Foreground="{StaticResource ArticlesListViewFontColor}"/>
+                                        <StackPanel Orientation="Horizontal" 
+                                                        Margin="10,10,10,0">
+                                            <TextBlock TextWrapping="Wrap" 
+                                                           Text="{Binding author}"
+                                                           FontSize="12"
+                                                           Margin="6,2,6,3"
+                                                           Foreground="{StaticResource ArticlesListViewFontColor}"/>
+                                            <TextBlock TextWrapping="Wrap" 
+                                                           Text="{Binding publishDate}"
+                                                           FontSize="12"
+                                                           Margin="6,2,6,3"
+                                                           Foreground="{StaticResource ArticlesListViewFontColor}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                        <Grid x:Name="ArticleContent" Margin="5,-3,0 -3" 
+                              Height="{Binding ElementName=MainRelativePanel, Path=ActualHeight}"
+                              HorizontalAlignment="Stretch"
+                              
+                              >
+                            <StackPanel
+                                         x:Name="ArticleStackPanel"
+                                         Orientation="Vertical" 
+                                         Background="White" 
+                                         Visibility="Visible">
+                                <WebView x:Name="ArticleWebView" 
+                                             NavigationCompleted="ArticleWebView_NavigationCompleted" 
+                                             NavigationStarting="ArticleWebView_NavigationStarting"/>
+                                </StackPanel>
+                                <Rectangle  x:Name="ArticleMask"
+                                            Margin="0,0,0,0" 
+                                            Fill="{StaticResource MainColor2}" 
+                                            Visibility="Visible">
+                                </Rectangle>
+
+                        <ProgressRing Height="100"
+                                          Width="100"
+                                          x:Name="ArticleProgressRing" 
+                                          IsActive="False" 
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Grid>
+                </RelativePanel>
+                <ProgressRing Height="100"
+                                          Width="100"
+                                          x:Name="GlobalProgressRing" 
+                                          IsActive="True" 
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                </Grid>
+            </SplitView.Content>
+        </SplitView>
+    </Grid>
+
+    
+</Page>
