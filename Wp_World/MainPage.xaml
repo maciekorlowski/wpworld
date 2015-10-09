@@ -21,16 +21,13 @@
                     <VisualState.Setters>
                         <Setter Target="MainSplitView.DisplayMode" Value="CompactOverlay"/>
                         <Setter Target="MainSplitView.IsPaneOpen" Value="False"/>
-                        <Setter Target="ArticlesListView.Width" Value="300"/>
+                        <Setter Target="ArticlesListView.Width" Value="Auto"/>
                         <Setter Target="MainSplitView.OpenPaneLength" Value="260"/>
-                        <Setter Target="ArticleContent.Width" Value="300"/>
-                        <!--<Setter Target= "ArticleContent.(RelativePanel.AlignRightWithPanel)" Value="False"/>
-                        <Setter Target= "ArticleContent.(RelativePanel.)" Value="True"/>-->
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="MediumState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="350"></AdaptiveTrigger>
+                        <AdaptiveTrigger MinWindowWidth="600"></AdaptiveTrigger>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="MainSplitView.DisplayMode" Value="CompactOverlay"/>
@@ -38,7 +35,6 @@
                         <Setter Target="ArticlesListView.Width" Value="300"/>
                         <Setter Target="ArticleContent.Visibility" Value="Visible"/>
                         <Setter Target="MainSplitView.OpenPaneLength" Value="260"/>
-                        <Setter Target= "ArticleContent.(RelativePanel.AlignRightWithPanel)" Value="True"/>
                         <Setter Target="ArticleContent.(RelativePanel.RightOf)" Value="ArticlesListView"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -52,7 +48,6 @@
                         <Setter Target="ArticlesListView.Width" Value="300"/>
                         <Setter Target="MainSplitView.OpenPaneLength" Value="260"/>
                         <Setter Target="ArticleContent.Visibility" Value="Visible"/>
-                        <Setter Target= "ArticleContent.(RelativePanel.AlignRightWithPanel)" Value="True"/>
                         <Setter Target="ArticleContent.(RelativePanel.RightOf)" Value="ArticlesListView"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -65,13 +60,12 @@
                 CompactPaneLength="50">
             <SplitView.Pane>
                 <StackPanel Orientation="Vertical" 
-                            Background="{StaticResource WpWorldTheme}"
-                           Width="260">
+                            Background="{StaticResource WpWorldTheme}">
                     <StackPanel Orientation="Horizontal">
                         <Button Style="{StaticResource HamburgerMenuButton}"
                                 Height="50"
                                 Width="50"
-                                Margin="0,0,0,0"
+                                Margin="5,0,0,0"
                                 x:Name="HamburgerButton"
                                 Content="&#xE700;" 
                                 Click="HamburgerButton_Click"/>
@@ -96,7 +90,7 @@
                     <Line Style="{StaticResource LineStyle}"/>
 
                     <Button Style="{StaticResource HamburgerMenuButton}"
-                            x:Name="HomeButton" Click="HomeButton_Click_1">
+                            x:Name="HomeButton">
                         <StackPanel  Style="{StaticResource HamburgerButtonContentStackPanelStyle}">
                             <TextBlock Style="{StaticResource HamburgerMenuIcon}" 
                                    Text="&#xE10F;"/>
@@ -158,9 +152,9 @@
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
-                <Grid>
-                    <RelativePanel x:Name="MainRelativePanel" Margin="0,6,0,6">
-                        <ListView x:Name="ArticlesListView" 
+                <RelativePanel Margin="0,6,0,-6">
+
+                    <ListView x:Name="ArticlesListView" 
                               Visibility="Visible" 
                               Margin="7,-3,0,-3"
                               >
@@ -172,7 +166,7 @@
                         </ListView.ItemContainerStyle>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderThickness="1" BorderBrush="Black" >
+                                <Border BorderThickness="1" BorderBrush="Black" Background="Red" >
                                     <StackPanel x:Name="ArticlesListViewStackPanel"
                                                     Orientation="Vertical"
                                                     Background="{StaticResource WpWorldTheme}" 
@@ -213,19 +207,21 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                        <Grid x:Name="ArticleContent" Margin="5,-3,0 -3" 
-                              Height="{Binding ElementName=MainRelativePanel, Path=ActualHeight}"
-                              HorizontalAlignment="Stretch"
-                              
-                              >
-                            <StackPanel
+                    <Grid x:Name="ArticleContent">
+                        <!--<ScrollViewer Margin="10,0,0,0">-->
+                            <!--<Grid>-->
+                                <StackPanel
                                          x:Name="ArticleStackPanel"
                                          Orientation="Vertical" 
                                          Background="White" 
                                          Visibility="Visible">
-                                <WebView x:Name="ArticleWebView" 
+                                    <Line Style="{StaticResource LineStyle}"/>
+                                    <Grid >
+                                        <WebView x:Name="ArticleWebView" 
                                              NavigationCompleted="ArticleWebView_NavigationCompleted" 
                                              NavigationStarting="ArticleWebView_NavigationStarting"/>
+                                        <!--<Rectangle Margin="0,0,0,0" Height="{Binding Height, ElementName=ArticleWebView}" Name="RecWeb" VerticalAlignment="Top" Fill ="#00000000"/>-->
+                                    </Grid>
                                 </StackPanel>
                                 <Rectangle  x:Name="ArticleMask"
                                             Margin="0,0,0,0" 
@@ -233,6 +229,9 @@
                                             Visibility="Visible">
                                 </Rectangle>
 
+                            <!--</Grid>-->
+
+                        <!--</ScrollViewer-->
                         <ProgressRing Height="100"
                                           Width="100"
                                           x:Name="ArticleProgressRing" 
@@ -241,13 +240,6 @@
                                           VerticalAlignment="Center"/>
                     </Grid>
                 </RelativePanel>
-                <ProgressRing Height="100"
-                                          Width="100"
-                                          x:Name="GlobalProgressRing" 
-                                          IsActive="True" 
-                                          HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
-                </Grid>
             </SplitView.Content>
         </SplitView>
     </Grid>

@@ -115,8 +115,8 @@ namespace Wp_World
             InitialiseSwipeModes();
 
             // Message += new MessageEventHandler(showMessage);
+
             LoadArticles();
-            
         }
 
         private void RaisePropertyChanged(string propertyName)
@@ -152,6 +152,7 @@ namespace Wp_World
             var _HeightString = await ArticleWebView.InvokeScriptAsync("eval",
              new[] { "document.body.scrollHeight.toString()" });
 
+            double awvHEight = int.Parse((string)_HeightString);// ArticleWebView.Height = int.Parse((string)_HeightString
             double height = Window.Current.Bounds.Height;
             ArticleWebView.Height = height;
         }
@@ -160,18 +161,7 @@ namespace Wp_World
         {
             Rss.RSS_adress = "https://wpworld.pl/feed/";
             //ArticlesListProgressRing.IsActive = true;
-            List<Article> articles;
-            try
-            {
-                articles = await Rss.loadArticles();
-            }
-            catch (Exception ex)
-            {
-                MessageDialog md = new MessageDialog("Błąd ładowania artykułów");
-                await md.ShowAsync();
-                articles = new List<Article>();
-            }
-            GlobalProgressRing.IsActive = false;
+            List<Article> articles = await Rss.loadArticles();
             //ArticlesListProgressRing.IsActive = false;
             Articles = new ObservableCollection<Article>(articles);
             ArticlesListView.ItemsSource = Articles;
@@ -239,21 +229,19 @@ namespace Wp_World
         private void ArticleWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
         {
             //ArticleStackPanel.Visibility = Visibility.Collapsed;
-            if (!ArticleProgressRing.IsActive){
-                ArticleProgressRing.IsActive = true;
-            }
         }
 
         private async void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
-            // Loading mask
             ArticleMask.Visibility = Visibility.Visible;
             ArticleProgressRing.IsActive = true;
+            
 
-            // Gets the selected article
             var frameworkElement = e.OriginalSource as Windows.UI.Xaml.FrameworkElement;
             SelectedArticle = frameworkElement.DataContext as Article;
+
+           // ArticleStackPanel.Height = Window.Current.Bounds.Height;
 
             await loadArticle();
 
@@ -263,7 +251,7 @@ namespace Wp_World
         //-------------------------------------------------------------------------------------------------------------------------------------
         // Home cathegory clicked events
         //-------------------------------------------------------------------------------------------------------------------------------------
-        private void HomeButton_Click_1(object sender, RoutedEventArgs e)
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
             HomeCathegoryChosen();
         }
@@ -398,11 +386,9 @@ namespace Wp_World
             
             await md.ShowAsync();
         }
-
- 
         //-------------------------------------------------------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------------------
-
+      
 
         //private delegate void MessageEventHandler(object sender, EventArgs e);
         //private event MessageEventHandler Message;
