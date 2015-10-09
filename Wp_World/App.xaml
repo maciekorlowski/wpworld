@@ -22,16 +22,16 @@
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="Padding" Value="0,0,9,0" />
+                <Setter Property="Padding" Value="0,0,0,0" />
                 <Setter Property="HorizontalAlignment" Value="Left" />
                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Top" />
                 <Setter Property="VerticalContentAlignment" Value="Center" />
                 <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
                 <Setter Property="FontSize" Value="14" />
-                <Setter Property="Width" Value="350" />
+                <Setter Property="Width" Value="260" />
                 <Setter Property="Height" Value="50" />
-                <Setter Property="Margin" Value="5,7,20,7"/>
+                <Setter Property="Margin" Value="0,7,0,7"/>
                 <Setter Property="UseSystemFocusVisuals" Value="True" />
                 <Setter Property="Template">
                     <Setter.Value>
@@ -93,7 +93,7 @@
             <Style x:Key="HamburgerButtonContentStackPanelStyle" TargetType="StackPanel">
                 <Setter Property="Width" Value="100"/>
                 <Setter Property="Orientation" Value="Horizontal"/>
-                <Setter Property="Margin" Value="-213,0,0,0"/>
+                <Setter Property="Margin" Value="-123,0,0,0"/>
             </Style>
 
      
