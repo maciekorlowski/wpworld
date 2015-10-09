@@ -1,0 +1,15 @@
+/osver:6.2
+/appcontainer
+/runtime:mrt100_app
+/eh:clr
+/pdb
+"/nativelink:C:\Program Files (x86)\MSBuild\Microsoft\.NetNative\x86\ilc\lib\Native\vmath.lib"
+"C:\Users\Kuba\documents\visual studio 2015\Projects\Wp_World\Wp_World\obj\x86\Debug\ilc\intermediate\MDIL\Wp_World.mdilexe"
+"/i:C:\Users\Kuba\documents\visual studio 2015\Projects\Wp_World\Wp_World\obj\x86\Debug\ilc\intermediate\MDIL\"
+/out:"C:\Users\Kuba\documents\visual studio 2015\Projects\Wp_World\Wp_World\obj\x86\Debug\ilc\intermediate\Native\Wp_World.exe"
+"/res:C:\Users\Kuba\documents\visual studio 2015\Projects\Wp_World\Wp_World\obj\x86\Debug\ilc\intermediate\Native.res"
+/standalone
+/shimexe
+"/nativelink:C:\Program Files (x86)\MSBuild\Microsoft\.NetNative\x86\ilc\lib\Native\Interop.Native.lib"
+"/nativelink:C:\Program Files (x86)\MSBuild\Microsoft\.NetNative\x86\ilc\lib\Native\corelib.native.lib"
+"/nativelink:C:\Program Files (x86)\MSBuild\Microsoft\.NetNative\x86\ilc\lib\Native\TypeLoader.Native.lib"
